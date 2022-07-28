@@ -1,4 +1,5 @@
 import requests
+from django.http import response
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from .forms import CityForm
@@ -42,12 +43,17 @@ def index(request):
     for citi in cities:
 
         r = requests.get(url.format(citi)).json()
-        city_weather  = {
-            'city' : citi.name,
-            'temperature' : r['main']['temp'],
-            'description' : r['weather'][0]['description'],
-            'icon' : r['weather'][0]['icon'],
-        }
+        if response == 404:
+           continue
+        city_weather = response.json()
+
+    
+        # city_weather  = {
+        #     'city' : citi.name,
+        #     'temperature' : r['main']['temp'],
+        #     'description' : r['weather'][0]['description'],
+        #     'icon' : r['weather'][0]['icon'],
+        # }
 
         weather_data.append(city_weather)
 
