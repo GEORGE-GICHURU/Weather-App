@@ -1,5 +1,5 @@
 import requests
-from django.http import response
+# from django.http import response
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from .forms import CityForm
@@ -10,6 +10,9 @@ from django.urls import reverse_lazy
 
 def index(request):
     url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=538e16ddc3b7a3e8e40557f838eb733a'
+
+
+
     err_msg = ''
     message = ''
     message_class = ''
@@ -43,17 +46,15 @@ def index(request):
     for citi in cities:
 
         r = requests.get(url.format(citi)).json()
-        if response == 404:
-           continue
-        city_weather = response.json()
+        
 
     
-        # city_weather  = {
-        #     'city' : citi.name,
-        #     'temperature' : r['main']['temp'],
-        #     'description' : r['weather'][0]['description'],
-        #     'icon' : r['weather'][0]['icon'],
-        # }
+        city_weather = {
+            'city': city.name,
+            'temperature': r['main']['temp'],
+            'description': r['weather'][0]['description'],
+            'icon': r['weather'][0]['icon'],
+        }
 
         weather_data.append(city_weather)
 
