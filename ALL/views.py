@@ -1,11 +1,13 @@
 import requests
-# from django.http import response
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from .forms import CityForm
 from .models import city
 from django.views.generic.edit import DeleteView
 from django.urls import reverse_lazy
+
+
+
 
 
 def index(request):
@@ -56,6 +58,8 @@ def index(request):
             'icon': r['weather'][0]['icon'],
         }
 
+        
+
         weather_data.append(city_weather)
 
     context = {
@@ -64,6 +68,7 @@ def index(request):
         'message':message,
         'message_class':message_class
     }
+
 
     return render(request, 'weather/weather.html',context)
 def about(request) :
